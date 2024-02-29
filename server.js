@@ -79,7 +79,7 @@ app.get('/profile/:id', (req, res) => {//confirming if the user exists or not
 })
 
 
-app.put('/image', (req, res) => {
+app.put('/image', (req, res) => {//Updating entries everytime a new image is entered on the input bar
     const { id } = req.body;
     let found = false;
 
