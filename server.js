@@ -2,6 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const  cors = require('cors');
+const knex = require('knex')
+
+const db = knex({
+    client: 'pg',
+    connection: {
+        host : '127.0.0.1',//Local host number
+        user : 'postgres',
+        password : 'smartbrain', // Adding password for the database
+        database : 'smart-brain',
+        port: 5432 // Correct port number for PostgreSQL
+    }
+});
 
 const app = express();
 
@@ -53,46 +65,42 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
     const { email, name, password } = req.body;
-    database.users.push({
-        id: '125',
-        name: name,
-        email: email,
-        entries: 0,
+    db('users')
+    .returning('*')
+    .insert({//Using insert method of knex, database communicates with server, and registered first user
+        email:email,
+        name:name,
         joined: new Date()
+    }).then(user => {
+        res.json(user[0]);
     })
-    res.json(database.users[database.users.length-1]);
+    .catch(err => res.status(400).json('Unable to register'))
 })
 
 app.get('/profile/:id', (req, res) => {//confirming if the user exists or not
     const { id } = req.params;
-    let found = false;
 
-    database.users.forEach(user => {
-        if (user.id === id) {
-            found = true;
-            return res.json(user);
-        } 
-    })
-    if (!found) {//If user isn't found
-        res.status(400).json('no such user');
+db.select('*').from('users').where({id})
+    .then(user => {
+        if(user.length) {
+            res.json(user[0])
+    } else {
+        res.status(400).json('not found')
     }
+})
+.catch(err => res.status(400).json('error getting the user'))
 })
 
 
 app.put('/image', (req, res) => {//Updating entries everytime a new image is entered on the input bar
     const { id } = req.body;
-    let found = false;
-
-    database.users.forEach(user => {
-        if (user.id === id) {
-            found = true;
-            user.entries++;
-            return res.json(user.entries);
-        } 
-    })
-    if (!found) {//If user isn't found
-        res.status(400).json('no such user');
-    }
+        db('users').where('id', '=', id)//Where id is equal to the id we receive from the body
+        .increment('entries', 1)
+        .returning('entries')
+        .then(entries => {
+            res.json(entries[0].entries);
+        })
+        .catch(err => res.status(400).json('Unable to get entries'))
 })
 
 
