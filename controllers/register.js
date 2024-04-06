@@ -1,5 +1,9 @@
 const handleRegister = (req, res, db, bcrypt) => {
     const { email, name, password } = req.body;
+    if(!email || !name || !password) {
+        //If no Register information is inserted then return an error in the console and on network response
+        return res.status(400).json('Incorrect form submission');
+    }
     const hash = bcrypt.hashSync(password);//Encrypt the password
     db.transaction(trx => {//Use transaction when i have to do more than two things at oncex`
         trx.insert({
