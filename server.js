@@ -1,8 +1,8 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt-nodejs');
-const  cors = require('cors');
-const knex = require('knex');
+import express from 'express';
+import bodyParser from 'body-parser';
+import bcrypt from 'bcrypt-nodejs';
+import cors from 'cors';
+import knex from 'knex';
 
 import register from "./controllers/register.js";
 import signin from "./controllers/signin.js";
