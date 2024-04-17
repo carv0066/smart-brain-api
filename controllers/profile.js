@@ -12,6 +12,4 @@ db.select('*').from('users').where({id})
 .catch(err => res.status(400).json('error getting the user'))
 }
 
-module.exports = {
-    handleProfile: handleProfile
-}
+export default handleProfile;

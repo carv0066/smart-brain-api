@@ -30,6 +30,5 @@ const handleRegister = (req, res, db, bcrypt) => {
 }
 
 //Exporting the function
-module.exports = {
-    handleRegister: handleRegister
-};
+
+export default handleRegister;

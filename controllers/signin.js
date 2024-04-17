@@ -25,6 +25,4 @@ const handleSignin = (req, res, db, bcrypt) => {
 }
 
 //Exporting the function
-module.exports = {
-    handleSignin: handleSignin
-}
+export default handleSignin;
