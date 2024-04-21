@@ -1,3 +1,5 @@
+import fetch from 'node-fetch'; // Import node-fetch
+
 const Clarifai = require('clarifai');
 
 const returnClarifaiRequestOptions = (imageUrl) => {
