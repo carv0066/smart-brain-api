@@ -30,5 +30,5 @@ const handleRegister = (req, res, db, bcrypt) => {
 }
 
 //Exporting the function
-
+console.log(typeof handleRegister);
 export default handleRegister;
