@@ -1,4 +1,5 @@
 const handleRegister = (req, res, db, bcrypt) => {
+    console.log("Request body:", req.body);
     const { email, name, password } = req.body;
     if(!email || !name || !password) {
         //If no Register information is inserted then return an error in the console and on network response
