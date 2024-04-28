@@ -1,6 +1,3 @@
-import fetch from 'node-fetch'; // Import node-fetch
-import Clarifai from 'clarifai'; // Import Clarifai using ES module syntax
-
 const returnClarifaiRequestOptions = (imageUrl) => {
     const PAT = "fe496818dcae4370b151fc4bbb9bb7d1";
     const USER_ID = "cjeternal21";
