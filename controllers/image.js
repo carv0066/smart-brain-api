@@ -1,5 +1,5 @@
 const returnClarifaiRequestOptions = (imageUrl) => {
-    const PAT = "fe496818dcae4370b151fc4bbb9bb7d1";
+    const PAT = process.env.API_CLARIFAI;
     const USER_ID = "cjeternal21";
     const APP_ID = "face-recognition-brain";
     const MODEL_ID = "face-detection";
