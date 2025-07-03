@@ -27,7 +27,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-//Made some changes to the imports 
+//Made some changes to the imports.
 app.get('/', (req, res) => { res.send('success') })
 app.post('/signin', (req, res) => { handleSignin(req, res, db, bcrypt) })
 app.post('/register', (req, res) => { handleRegister(req, res, db, bcrypt) })
